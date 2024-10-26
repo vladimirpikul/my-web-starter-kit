@@ -1,0 +1,29 @@
+@use '../abstracts/mixins' as mixin;
+
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  @include mixin.font-smoothing(on);
+  color: var(--base-text-color);
+  background: var(--base-background-color);
+  font: var(--base-font-size) / var(--base-line-height) var(--base-font-family);
+  min-width: var(--base-min-width);
+}
+
+img {
+  max-width: 100%;
+  min-height: 1px;
+  height: auto;
+}
+
+.img-wrap {
+  line-height: 0;
+}

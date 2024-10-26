@@ -1,0 +1,17 @@
+{
+  "root": true,
+  "globals": {},
+  "env": {
+    "browser": true,
+    "node": true
+  },
+  "plugins": [
+    "import"
+  ],
+  "extends": [
+    "airbnb-base"
+  ],
+  "rules": {
+    "consistent-return": "off"
+  }
+}

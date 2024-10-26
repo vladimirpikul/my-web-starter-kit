@@ -1,0 +1,75 @@
+/// Mixin helping with long string of the url
+/// @link https://css-tricks.com/snippets/css/prevent-long-urls-from-breaking-out-of-container/
+/// @example @include word-wrap;
+
+@mixin word-wrap() {
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  word-break: break-all;
+  word-break: break-word;
+  hyphens: auto;
+}
+
+
+/// Preventing Overflow with Ellipsis
+/// @example @include ellipsis;
+
+@mixin ellipsis() {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+
+/// Font-smothing
+/// @example @include font-smoothing(on);
+/// @include font-smoothing(off);
+@mixin font-smoothing($value: on){
+  @if $value == on{
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  @else{
+    -webkit-font-smoothing: subpixel-antialiased;
+    -moz-osx-font-smoothing: auto;
+  }
+}
+
+
+/// Animate css properties
+/// @example @include animate(color);
+/// or @include animate(color width);
+/// or @include animate(color width, 1s, linear);
+/// or @include animate(color width, 1s, ease-in, 0.5s); - defining delay ALL params should be passed!
+
+$animation-speed: 0.3s !default;
+
+@mixin animate($properties, $duration: $animation-speed, $easing: ease-in-out, $delay: false) {
+  @if ($properties and $duration and $easing and $delay) {
+    $list:();
+    @each $prop in $properties {
+      $str: #{$prop} #{$duration} #{$easing} #{$delay};
+      $list: append($list, $str, comma);
+    }
+    transition: $list;
+  } @else {
+    $list:();
+    @each $prop in $properties {
+      $str: #{$prop} #{$duration} #{$easing};
+      $list: append($list, $str, comma);
+    }
+    transition: $list;
+  }
+}
+
+
+/// Mixin for styling form-placeholders
+/// @example @include placeholder { color: red; }
+
+@mixin placeholder {
+  &::-webkit-input-placeholder {@content;}
+  &::-moz-placeholder {opacity: 1; @content;}
+  &:-moz-placeholder {@content;}
+  &:-ms-input-placeholder {@content;}
+  &.placeholder {@content;}
+}
